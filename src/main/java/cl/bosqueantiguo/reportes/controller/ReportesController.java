@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cl.bosqueantiguo.reportes.model.ReporteClientesRegistrados;
 import cl.bosqueantiguo.reportes.service.ReporteClientesRegistradosService;
+import cl.bosqueantiguo.reportes.service.ReporteProductosService; // IMPORTAR el nuevo servicio
 import cl.bosqueantiguo.reportes.DTO.ProductoDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,16 +21,36 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
-@RequestMapping("/reportes/clientes-registrados")
+@RequestMapping("/reportes")
+@CrossOrigin(origins = "*")
 public class ReportesController {
+    
+    // Inyectamos el servicio de Clientes
     @Autowired
     private ReporteClientesRegistradosService reporteClientesRegistradosService;
 
+    // Inyectamos el NUEVO servicio de Productos
+    @Autowired
+    private ReporteProductosService reporteProductosService;
+
+
+    // --- Endpoints de Reporte de PRODUCTOS ---
+    
+    // Moví el endpoint de productos a su propia ruta
+    @Operation(summary = "Obtiene la lista de productos desde el microservicio de Productos")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de productos obtenida",
+            content = @Content(mediaType = "application/json",
+            schema = @Schema(implementation = ProductoDTO.class)))
+    })
     @GetMapping("/productos")
     public List<ProductoDTO> obtenerProductos() {
-        return reporteClientesRegistradosService.obtenerProductos();
+        // Llama al servicio correcto
+        return reporteProductosService.obtenerProductos();
     }
 
+    
+    // --- Endpoints de Reporte de CLIENTES REGISTRADOS ---
 
     @Operation(summary = "Genera un nuevo reporte de clientes registrados")
     @ApiResponses(value = {
@@ -36,7 +58,8 @@ public class ReportesController {
             content = @Content(mediaType = "application/json",
             schema = @Schema(implementation = ReporteClientesRegistrados.class)))
     })
-    @PostMapping
+    // Ruta específica para este endpoint
+    @PostMapping("/clientes-registrados") 
     public ReporteClientesRegistrados generarReporte() {
         return reporteClientesRegistradosService.generarReporteClientesRegistrados();
     }
@@ -47,7 +70,8 @@ public class ReportesController {
             content = @Content(mediaType = "application/json",
             schema = @Schema(implementation = ReporteClientesRegistrados.class)))
     })
-    @GetMapping
+    // Ruta específica para este endpoint
+    @GetMapping("/clientes-registrados")
     public List<ReporteClientesRegistrados> listarReportes() {
         return reporteClientesRegistradosService.listarReportes();
     }
@@ -58,7 +82,8 @@ public class ReportesController {
             content = @Content(mediaType = "application/json",
             schema = @Schema(implementation = ReporteClientesRegistrados.class)))
     })
-    @GetMapping("/mayor-a/{minClientes}")
+    // Ruta específica para este endpoint
+    @GetMapping("/clientes-registrados/mayor-a/{minClientes}")
     public List<ReporteClientesRegistrados> getReportesConMasDe(@PathVariable int minClientes) {
         return reporteClientesRegistradosService.reportesConMasDe(minClientes);
     }
@@ -70,7 +95,8 @@ public class ReportesController {
             content = @Content(mediaType = "application/json",
             schema = @Schema(implementation = ReporteClientesRegistrados.class)))
     })
-    @GetMapping("/ultimos/{n}")
+    // Ruta específica para este endpoint
+    @GetMapping("/clientes-registrados/ultimos/{n}")
     public List<ReporteClientesRegistrados> getUltimosN(@PathVariable int n) {
         return reporteClientesRegistradosService.ultimosNReportes(n);
     }
