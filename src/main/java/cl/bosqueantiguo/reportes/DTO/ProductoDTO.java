@@ -11,5 +11,7 @@ public class ProductoDTO {
     private boolean disponible;
     private Double precio;
     private Integer stock;
+    private Integer stockCritico;
     private String rutaImagen;
+
 }
