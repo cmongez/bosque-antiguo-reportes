@@ -43,13 +43,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     .getPayload();
                 
                 String username = claims.getSubject();
-                String rol = (String) claims.get("rol");
+                @SuppressWarnings("unchecked")
+                List<String> roles = (List<String>) claims.get("roles");
                 
-                if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                    // Crear autenticación con roles
-                    List<SimpleGrantedAuthority> authorities = List.of(
-                        new SimpleGrantedAuthority("ROLE_" + rol)
-                    );
+                if (username != null && roles != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    
+                    List<SimpleGrantedAuthority> authorities = roles.stream()
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                        .collect(Collectors.toList());
                     
                     Authentication auth = new UsernamePasswordAuthenticationToken(
                         username, null, authorities

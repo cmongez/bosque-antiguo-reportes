@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +21,8 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Reporte generado con la cantidad de usuarios con rol CLIENTE")
 public class ReporteClientesRegistrados {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reporte_clientes_seq")
+    @SequenceGenerator(name = "reporte_clientes_seq", sequenceName = "REPORTE_CLIENTES_SEQ", allocationSize = 1)
     @Schema(description = "ID único del reporte", example = "1")
     private Long id;
 
