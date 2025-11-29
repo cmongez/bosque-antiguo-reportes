@@ -1,4 +1,4 @@
-package cl.bosqueantiguo.reportes.client;
+﻿package cl.bosqueantiguo.reportes.client;
 
 import cl.bosqueantiguo.reportes.DTO.ProductoDTO;
 import cl.bosqueantiguo.reportes.DTO.StockStatusDTO;

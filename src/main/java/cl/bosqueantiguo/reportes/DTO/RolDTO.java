@@ -1,4 +1,4 @@
-package cl.bosqueantiguo.reportes.DTO;
+﻿package cl.bosqueantiguo.reportes.DTO;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;

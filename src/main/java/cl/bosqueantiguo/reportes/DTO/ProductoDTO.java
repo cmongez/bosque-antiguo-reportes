@@ -1,4 +1,4 @@
-package cl.bosqueantiguo.reportes.DTO;
+﻿package cl.bosqueantiguo.reportes.DTO;
 
 import lombok.Data;
 

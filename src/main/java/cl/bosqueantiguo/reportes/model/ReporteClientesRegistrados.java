@@ -1,4 +1,4 @@
-package cl.bosqueantiguo.reportes.model;
+﻿package cl.bosqueantiguo.reportes.model;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package cl.bosqueantiguo.reportes.service;
+﻿package cl.bosqueantiguo.reportes.service;
 
 // Importa clases necesarias para fechas y listas
 import java.time.LocalDateTime;

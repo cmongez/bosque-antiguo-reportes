@@ -1,4 +1,4 @@
-package cl.bosqueantiguo.reportes.config;
+﻿package cl.bosqueantiguo.reportes.config;
 
 // Importa las anotaciones de configuración de Spring
 import org.springframework.context.annotation.Bean;
