@@ -1,4 +1,4 @@
-﻿package cl.bosqueantiguo.reportes.config;
+package cl.bosqueantiguo.reportes.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

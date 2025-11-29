@@ -1,4 +1,4 @@
-﻿package cl.bosqueantiguo.reportes.client;
+package cl.bosqueantiguo.reportes.client;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;

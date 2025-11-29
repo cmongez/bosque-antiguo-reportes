@@ -1,4 +1,4 @@
-﻿package cl.bosqueantiguo.reportes.config;
+package cl.bosqueantiguo.reportes.config;
 
 import java.util.List;
 

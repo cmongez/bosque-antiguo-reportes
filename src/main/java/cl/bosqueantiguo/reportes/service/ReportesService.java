@@ -1,4 +1,4 @@
-﻿package cl.bosqueantiguo.reportes.service;
+package cl.bosqueantiguo.reportes.service;
 
 import cl.bosqueantiguo.reportes.DTO.*;
 import cl.bosqueantiguo.reportes.client.ProductosClient;
